@@ -1,0 +1,52 @@
+.navbar{
+  /* display: block; */
+  display: flex;
+  background-color: black;
+  /* width: 100%; */
+  overflow: hidden;
+  padding: 10px 2%;
+  display: flex;
+  border: #b82121;
+  position: fixed;
+  object-fit: contain;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  min-height:66px;
+
+
+}
+.navbar-items {
+  background-color: black;
+  margin: 0;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items:center;
+  color: white;
+  text-decoration: none;
+}
+
+.name-tag{
+  color: rgb(158, 133, 100);
+  padding: 3%;
+}
+
+.pages{
+  display: flex ;
+  justify-content:space-around;
+  align-items: center;
+  padding: 4%;
+}
+
+.links {
+  padding: 3%;
+}
+
+.log-button{
+  padding: 3%;
+  background-color: black;
+  color: aliceblue;
+  border: none;
+}
