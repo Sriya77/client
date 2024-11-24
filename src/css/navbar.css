@@ -1,21 +1,14 @@
-.navbar{
-  /* display: block; */
+.navbar {
   display: flex;
-  background-color: black;
-  /* width: 100%; */
-  overflow: hidden;
-  padding: 10px 2%;
-  display: flex;
-  border: #b82121;
-  position: fixed;
-  object-fit: contain;
-  top: 0;
-  width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  min-height:66px;
-
-
+  padding: 15px 30px;
+  background-color: #1f2833;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: 0.3s ease-in-out;
 }
 .navbar-items {
   background-color: black;

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import "../css/auth.css";
+import { auth } from ".././firebaseConfig"; // Adjust the path to your config file
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 export const Auth = () => {
   return (
-    <div className="auth">
+    <div style={styles.auth}>
       <Login />
       <Register />
     </div>
@@ -14,99 +16,169 @@ export const Auth = () => {
 };
 
 const Login = () => {
-  const [_,setCookies] = useCookies(["access_token"]);
-
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const result = await axios.post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      });
-
-      setCookies("access_token", result.data.token);
-      window.localStorage.setItem("userID", result.data.userID);
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login Successful!");
       navigate("/");
     } catch (error) {
-      console.error(error);
+      alert("Login Failed: " + error.message);
     }
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
+    <div style={styles.authContainer}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h2 style={styles.heading}>Login</h2>
+        <div style={styles.formGroup}>
+          <label htmlFor="email" style={styles.label}>
+            Email:
+          </label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            style={styles.input}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
+        <div style={styles.formGroup}>
+          <label htmlFor="password" style={styles.label}>
+            Password:
+          </label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            style={styles.input}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" style={styles.button}>
+          Login
+        </button>
       </form>
     </div>
   );
 };
 
 const Register = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/auth/register", {
-        username,
-        password,
-      });
-      alert("Registration Completed! Now login.");
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Registration Successful! Please login.");
     } catch (error) {
-      console.error(error);
+      alert("Registration Failed: " + error.message);
     }
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
+    <div style={styles.authContainer}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h2 style={styles.heading}>Register</h2>
+        <div style={styles.formGroup}>
+          <label htmlFor="email" style={styles.label}>
+            Email:
+          </label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            style={styles.input}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
+        <div style={styles.formGroup}>
+          <label htmlFor="password" style={styles.label}>
+            Password:
+          </label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            style={styles.input}
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" style={styles.button}>
+          Register
+        </button>
       </form>
     </div>
   );
+};
+const styles = {
+  auth: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
+    gap: "20px",
+    padding: "50px",
+    background: "linear-gradient(to right, #1f4037, #99f2c8)",
+    minHeight: "100vh",
+  },
+  authContainer: {
+    background: "#ffffff",
+    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+    borderRadius: "10px",
+    padding: "30px",
+    width: "100%",
+    maxWidth: "400px",
+    animation: "fadeIn 0.6s ease-in-out",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
+  },
+  heading: {
+    fontSize: "1.8rem",
+    fontWeight: "600",
+    color: "#1f4037",
+    textAlign: "center",
+    marginBottom: "20px",
+  },
+  formGroup: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "5px",
+  },
+  label: {
+    fontSize: "1rem",
+    color: "#555",
+  },
+  input: {
+    padding: "10px",
+    fontSize: "1rem",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    outline: "none",
+    transition: "border-color 0.3s ease",
+  },
+  inputFocus: {
+    borderColor: "#1f4037",
+  },
+  button: {
+    padding: "12px 20px",
+    fontSize: "1rem",
+    backgroundColor: "#1f4037",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    transition: "background-color 0.3s ease",
+    fontWeight: "bold",
+  },
+  buttonHover: {
+    backgroundColor: "#13b47d",
+  },
 };
