@@ -15,7 +15,7 @@ export const Navbar = () => {
   return (
     <nav style={styles.navbar}>
       <div style={styles.logo}>
-        <h1 style={styles.logoText}>RECIPE Ideas</h1>
+        <h1 style={styles.logoText}>RecipeIdeas</h1>
       </div>
       <div style={styles.navItems}>
         <Link style={styles.link} to="/">
@@ -49,7 +49,9 @@ const styles = {
     position: "sticky",
     top: 0,
     zIndex: 1000,
-    transition: "background-color 0.3s ease-in-out",
+    width: "100%",
+    height: "8vh",
+    margin: 0,
   },
   logo: {
     display: "flex",
@@ -76,10 +78,6 @@ const styles = {
     borderRadius: "5px",
     fontWeight: "500",
     transition: "color 0.3s ease, background-color 0.3s ease",
-  },
-  linkHover: {
-    backgroundColor: "#45a29e",
-    color: "#ffffff",
   },
   logoutButton: {
     backgroundColor: "transparent",

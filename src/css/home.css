@@ -1,47 +1,257 @@
-.container{
-  max-width: 1300px;
-  width: 100%;
-}
+/* Home.css */
 
-.section{
+.section {
+  background-color: rgb(245, 238, 230); /* Light beige color */
+  padding: 40px 0;
   min-height: 100vh;
-  display: block;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-h1{
-  font-size: 50px;
-  line-height: 60px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   text-align: center;
-  margin-bottom: 40px;
+  width: 100%;
 }
 
-.recipes-row{
+.heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #222831; /* Soft pinkish color */
+  margin-bottom: 30px;
+}
+
+.recipes {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.recipe{
-  flex: 0 0 calc(33.3% - 20px);
-  max-width: calc(33.3% - 20px);
-  width: 100px;
-  border-radius: 10px;
+  gap: 30px;
   padding: 20px;
-  margin-bottom: 20px;
-  background-color: rgb(16, 15, 15);
-  transition: .3s;
-  border: 2px solid transparent;
+  width: 100%;
 }
 
-.recipe:hover{
-  border-color: rgb(27, 26, 26);
-   
+.recipesRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.recipe img{
+.recipeCard {
+  background-color: #31363f; /* Light cream color */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   overflow: hidden;
-  object-fit:cover;
-  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto; /* Ensure the card adjusts dynamically based on content */
 }
+
+.recipeTitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: rgb(243, 215, 202); /* Soft peach color */
+  margin-bottom: 15px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.recipeDetails {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.detailsTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222831;
+  margin-bottom: 8px;
+}
+
+.detailsList {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.detailsItem {
+  margin-bottom: 5px;
+}
+
+.recipeInstructions {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* Ensure image is fully visible without distortion */
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.recipeTime {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f4037;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.knowMoreButton {
+  background-color: #2a9d8f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.knowMoreButton:hover {
+  background-color: #238c77; /* Darker shade for hover effect */
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top of other content */
+}
+
+/* Modal Content */
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.modal h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Modal Image */
+.modalImage {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* From Uiverse.io by aguerquin */ 
+.button-icon {
+  display: flex;
+  border: 3px #fff solid;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.icon {
+  background-color: #fff;
+  padding: 10px 10px 5px 10px;
+}
+
+.icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.cube {
+  transition: all 0.4s;
+  transform-style: preserve-3d;
+  width: 200px;
+  height: 20px;
+}
+
+.button-icon:hover {
+  border-color: #ff98a2;
+}
+
+.button-icon:hover .cube {
+  transform: rotateX(90deg);
+}
+
+.button-container {
+  margin-left: 0.2em;
+  margin-bottom: 0.8em;
+}
+
+.side {
+  position: absolute;
+  height: 47px;
+  width: 200px;
+  display: flex;
+  font-size: 0.8em;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.top {
+  background: #ff98a2;
+  color: #fff;
+  transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+}
+
+.front {
+  background: #222229;
+  color: #fff;
+  transform: translate3d(0, 0, 1em);
+}
+

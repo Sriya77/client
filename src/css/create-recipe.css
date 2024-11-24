@@ -1,16 +1,101 @@
-.create-recipe {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  width: 400px;
+/* create-recipe.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
+
+.create-recipe {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-recipe h2 {
+  text-align: center;
+  color: #444;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
 .create-recipe form {
   display: flex;
   flex-direction: column;
+}
+
+.create-recipe label {
+  font-size: 1rem;
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+.create-recipe input,
+.create-recipe textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+  background-color: #f8f8f8;
+}
+
+.create-recipe input:focus,
+.create-recipe textarea:focus {
+  border-color: #007BFF;
+  background-color: #fff;
+}
+
+.create-recipe textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.create-recipe button {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.create-recipe button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.create-recipe input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.create-recipe button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .create-recipe {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  .create-recipe h2 {
+    font-size: 1.5rem;
+  }
+
+  .create-recipe button {
+    padding: 10px;
+  }
 }

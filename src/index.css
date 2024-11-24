@@ -1,76 +1,100 @@
+/* Global Styles */
 html,
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Arial', sans-serif; /* Modern and clean font */
+  color: rgb(62, 50, 50); /* Primary text color */
+  background-color: rgb(245, 238, 230); /* Neutral background for better contrast */
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(80, 60, 60); /* Updated link color */
+  transition: color 0.3s ease;
 }
 
+a:hover {
+  color: rgb(168, 124, 124); /* Hover effect for links */
+}
+
+/* Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 0px;
   height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(114, 113, 113);
+  background-color: rgb(126, 99, 99); /* Matches palette */
   border-radius: 10px;
-  height: 200px;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.category-btn:hover {
-  background-color: #FC1503 !important;
-  color: white !important;
-}
-
-.category-btn:hover span{
-  color: white !important;
-}
-
-.react-player {
-  height: 77vh !important;
-  width: 100% !important;
-}
-
-.search-bar{
-  border:none;
-  outline:none;
-  width:350px;
-}
-
-.category-btn{
-  font-weight: bold !important;
+/* Category Button Styling */
+.category-btn {
+  font-weight: bold;
   text-transform: capitalize;
   display: flex;
   align-items: center;
   justify-content: start;
-  cursor:pointer;
-  background: transparent;
-  outline: none;
+  cursor: pointer;
+  background: rgb(80, 60, 60); /* Button background color */
+  color: white;
+  padding: 10px 20px; /* More padding for a professional look */
+  margin: 10px 0;
+  border-radius: 25px;
   border: none;
-
-  padding: 7px 15px;
-  margin: 10px 0px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+.category-btn:hover {
+  background-color: rgb(168, 124, 124); /* Hover effect */
+  transform: translateY(-3px); /* Lift effect on hover */
+}
+
+.category-btn span {
+  color: white;
+}
+
+/* Search Bar Styling */
+.search-bar {
+  border: 1px solid rgb(126, 99, 99);
+  outline: none;
+  width: 350px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(245, 245, 245);
+  transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: rgb(168, 124, 124);
+}
+
+/* React Player */
+.react-player {
+  height: 70vh !important;
+  width: 100% !important;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgb(62, 50, 50); /* Placeholder background */
+}
+
+/* Responsive Design */
 @media screen and (max-width: 900px) {
-  .category-btn{
+  .category-btn {
     margin: 10px;
   }
 }
 
-@media screen and (max-width:800px){
-  .copyright{
-    display:none !important;
+@media screen and (max-width: 800px) {
+  .copyright {
+    display: none !important;
   }
 }
 
@@ -80,9 +104,54 @@ a {
   }
 
   .react-player {
-    height: 45vh !important;
+    height: 50vh !important;
   }
-  .search-bar{
-    width:200px;
+
+  .search-bar {
+    width: 200px;
   }
+}
+
+/* Additional Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section {
+  padding: 40px 0;
+  background-color: rgb(245, 238, 230);
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(62, 50, 50);
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: rgb(80, 60, 60);
+  color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: rgb(168, 124, 124);
+  margin-bottom: 10px;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: rgb(228, 228, 228);
 }

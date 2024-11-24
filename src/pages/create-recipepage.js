@@ -25,7 +25,7 @@ export const CreateRecipes = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submitting recipe:", recipe);  // Check state here
+    console.log("Submitting recipe:", recipe); // Check state here
     try {
       const docRef = await addDoc(collection(db, "recipes"), recipe);
       alert("Recipe created!");
@@ -34,13 +34,12 @@ export const CreateRecipes = () => {
       console.error("Error adding document: ", error);
     }
   };
-  
 
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Create Recipe</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
-        <label htmlFor="name" style={styles.label}>Name</label>
+        <label htmlFor="name" style={styles.label}>Recipe Name</label>
         <input
           type="text"
           id="name"
@@ -106,19 +105,21 @@ export const CreateRecipes = () => {
 
 const styles = {
   container: {
-    maxWidth: "600px",
+    maxWidth: "100%", // Increased width for better form size
     margin: "50px auto",
-    padding: "20px",
+    padding: "30px", // Increased padding for more space
     backgroundColor: "#ffffff",
     borderRadius: "10px",
     boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
     fontFamily: "'Arial', sans-serif",
+    display: "flex",
+    flexDirection: "column",
   },
   heading: {
     textAlign: "center",
-    color: "#2c3e50",
+    color: "#222831", // Dark text color
     fontSize: "2rem",
-    fontWeight: "bold",
+    fontWeight: "600",
     marginBottom: "20px",
   },
   form: {
@@ -128,7 +129,7 @@ const styles = {
   label: {
     fontSize: "1rem",
     marginBottom: "5px",
-    color: "#34495e",
+    color: "#34495e", // Soft gray color
     fontWeight: "500",
   },
   input: {
@@ -156,16 +157,18 @@ const styles = {
     padding: "12px",
     fontSize: "1rem",
     color: "#ffffff",
-    backgroundColor: "#3498db",
+    backgroundColor: "#2a9d8f", // Greenish-blue color
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
-    fontWeight: "bold",
+    fontWeight: "600",
     textTransform: "uppercase",
     transition: "background-color 0.3s ease, box-shadow 0.3s ease",
   },
   buttonHover: {
-    backgroundColor: "#2980b9",
-    boxShadow: "0 4px 8px rgba(52, 152, 219, 0.4)",
+    backgroundColor: "#1b7e6f", // Darker greenish-blue on hover
+    boxShadow: "0 4px 8px rgba(42, 157, 143, 0.4)",
   },
 };
+
+export default CreateRecipes;

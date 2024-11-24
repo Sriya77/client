@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { auth } from ".././firebaseConfig"; // Adjust the path to your config file
+import { useNavigate, Link } from "react-router-dom";
+import { auth } from "../firebaseConfig";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import "../css/auth.css";
 
-export const Auth = () => {
+const Auth = () => {
   return (
-    <div style={styles.auth}>
-      <Login />
-      <Register />
+    <div className="auth-wrapper">
+      <div className="auth-container">
+        <Login />
+        <div className="divider" />
+        <Register />
+      </div>
     </div>
   );
 };
@@ -18,167 +22,129 @@ export const Auth = () => {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Login Successful!");
       navigate("/");
     } catch (error) {
       alert("Login Failed: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={styles.authContainer}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.heading}>Login</h2>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.formGroup}>
-          <label htmlFor="password" style={styles.label}>
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
-      </form>
-    </div>
+    <form className="form" onSubmit={handleLogin}>
+      <h2 className="form-title">Sign In</h2>
+      <div className="input-container">
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="input-container">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button className="animated-button" type="submit" disabled={loading}>
+  <svg xmlns="http://www.w3.org/2000/svg" className="arr-2" viewBox="0 0 24 24">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+  <span className="text">{loading ? "Logging in..." : "Log In"}</span>
+  <span className="circle"></span>
+  <svg xmlns="http://www.w3.org/2000/svg" className="arr-1" viewBox="0 0 24 24">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+</button>
+
+      {/* <p className="link-text">
+        Don't have an account? <Link to="/register">Sign Up</Link>
+      </p> */}
+    </form>
   );
 };
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert("Registration Successful! Please login.");
+      alert("Registration Successful! Please log in.");
     } catch (error) {
       alert("Registration Failed: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={styles.authContainer}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.heading}>Register</h2>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.formGroup}>
-          <label htmlFor="password" style={styles.label}>
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.button}>
-          Register
-        </button>
-      </form>
-    </div>
+    <form className="form" onSubmit={handleRegister}>
+      <h2 className="form-title">Sign Up</h2>
+      <div className="input-container">
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="input-container">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button className="animated-button" type="submit" disabled={loading}>
+  <svg xmlns="http://www.w3.org/2000/svg" className="arr-2" viewBox="0 0 24 24">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+  <span className="text">{loading ? "Signing up..." : "Sign Up"}</span>
+  <span className="circle"></span>
+  <svg xmlns="http://www.w3.org/2000/svg" className="arr-1" viewBox="0 0 24 24">
+    <path
+      d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+    ></path>
+  </svg>
+</button>
+
+      {/* <p className="link-text">
+        Already have an account? <Link to="/login">Log In</Link>
+      </p> */}
+    </form>
   );
 };
-const styles = {
-  auth: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "flex-start",
-    gap: "20px",
-    padding: "50px",
-    background: "linear-gradient(to right, #1f4037, #99f2c8)",
-    minHeight: "100vh",
-  },
-  authContainer: {
-    background: "#ffffff",
-    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-    borderRadius: "10px",
-    padding: "30px",
-    width: "100%",
-    maxWidth: "400px",
-    animation: "fadeIn 0.6s ease-in-out",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-  },
-  heading: {
-    fontSize: "1.8rem",
-    fontWeight: "600",
-    color: "#1f4037",
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  formGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-  },
-  label: {
-    fontSize: "1rem",
-    color: "#555",
-  },
-  input: {
-    padding: "10px",
-    fontSize: "1rem",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    outline: "none",
-    transition: "border-color 0.3s ease",
-  },
-  inputFocus: {
-    borderColor: "#1f4037",
-  },
-  button: {
-    padding: "12px 20px",
-    fontSize: "1rem",
-    backgroundColor: "#1f4037",
-    color: "#ffffff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    transition: "background-color 0.3s ease",
-    fontWeight: "bold",
-  },
-  buttonHover: {
-    backgroundColor: "#13b47d",
-  },
-};
+
+export default Auth;
